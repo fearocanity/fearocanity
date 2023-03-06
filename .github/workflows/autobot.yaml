@@ -2,7 +2,7 @@ name: "init banner"
 on:
    workflow_dispatch:
    schedule:
-     - cron: "0 */2 * * *"
+     - cron: "0 * * * *"
 jobs:
  inits:
     runs-on: ubuntu-latest    
