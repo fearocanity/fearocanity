@@ -7,6 +7,6 @@ status="$(printf '%s' "$body" | sed -E 's_\},\{_}\n{_g' | sed -nE 's_.*text":"([
 image="$(printf '%s' "$body" | sed -nE 's_amp;__g;s_.*name="twitter:image" content="([^"]*)".*_\1_p')"
 curl -sL "$image" -o temp.jpg
 
-convert -size 800x300 xc:"#7D9CBE" \( temp.jpg -bordercolor "#7D9CBE" -border 75 -resize 300x300 \) -geometry +0+0 -composite -gravity west -fill "#BE4C7D" -fill "#312D2C" -font oswald.ttf -pointsize 68 -annotate +300+0 "${status%#*}\n${status#*#}" -geometry +100+0 -append banner.jpg
+convert -size 800x300 xc:"#7D9CBE" \( temp.jpg -bordercolor "#7D9CBE" -border 75 -resize 300x300 \) -geometry +0+0 -composite -gravity west -fill "#BE4C7D" -fill "#312D2C" -font oswald.ttf -pointsize 68 -annotate +300+0 "${status%#*}${status#*#}" -geometry +100+0 -append banner.jpg
 
 rm temp.jpg
