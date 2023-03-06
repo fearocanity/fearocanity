@@ -1,2 +1,2 @@
 ## Bocchi the Rock page
-![Hello](./temp/banner.jpg)
+![Hello](./banner.jpg)
