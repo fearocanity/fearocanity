@@ -16,7 +16,7 @@ jobs:
         with:
           commit_message: "updated"
           repository: .
-          file_pattern: *.jpg README.md
+          file_pattern: ./*.jpg README.md
 
         env:
 
