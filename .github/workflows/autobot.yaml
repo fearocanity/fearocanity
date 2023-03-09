@@ -1,4 +1,4 @@
-name: "init banner"
+name: "update status"
 on:
    workflow_dispatch:
    schedule:
