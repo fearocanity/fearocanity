@@ -97,6 +97,6 @@ until [[ "${counter_like}" -eq "${status_like}" ]] && [[ "${counter_followers}" 
 		-append banner_"${inc_frame}".png &
 done
 wait
-convert -dispose none -delay 2 -loop 1$(ls -v banner_*.png) -coalesce banner.gif
+convert -dispose none -delay 2 -loop 1 $(ls -v banner_*.png) -coalesce banner.gif
 mogrify -layers 'optimize' -fuzz 7% -loop 1 banner.gif
 rm temp.jpg output.png fblogo.png outshadow.png banner_*.png
