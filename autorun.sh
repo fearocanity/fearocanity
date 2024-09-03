@@ -1,6 +1,6 @@
 #!/bin/bash
 
-date="$(( $(date +%s) + 18000 ))"
+date="$(( $(date +%s) + 14400 ))"
 
 while [[ "${date}" -gt "$(date +%s)" ]]; do
     curl -sLf -H "Authorization: Bearer ${1}" \
