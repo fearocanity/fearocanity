@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   execute:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: ${{ github.triggering_actor == github.repository_owner }}
     steps:
       - uses: actions/checkout@v4
@@ -19,4 +19,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.G_TOK }}
           WORKFLOW_FILE: "autobot.yaml"
         run: |
+          sudo apt install imagemagick -y
           bash autorun.sh "${GITHUB_TOKEN}" "${WORKFLOW_FILE}" "${{ github.ref }}"
