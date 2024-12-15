@@ -19,5 +19,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.G_TOK }}
           WORKFLOW_FILE: "autobot.yaml"
         run: |
-          sudo apt install imagemagick -y
           bash autorun.sh "${GITHUB_TOKEN}" "${WORKFLOW_FILE}" "${{ github.ref }}"
