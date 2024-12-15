@@ -5,10 +5,19 @@ jobs:
  inits:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      
+      - name: cache_imagemagick
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/bin
+          key: ${{ runner.os }}-imagemagick-${{ hashFiles('**/imagemagick.version') }}
+          restore-keys: |
+            ${{ runner.os }}-imagemagick-
+
       - name: execute
         run: |
-         sudo apt install imagemagick -y
+         command -v convert &>/dev/null || sudo apt install imagemagick -y
          bash main.sh
          bash main_stats.sh
         
