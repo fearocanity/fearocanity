@@ -10,7 +10,7 @@ body_en="$(curl -s -H "sec-fetch-site: none" -H "sec-fetch-mode: navigate" -H "A
 
 status="$(sed -E 's_\},\{_}\n{_g' <<< "${body}" | sed -nE 's_\._,_g;s_.*text":"([0-9,.]*) \\u201e[^"]*".*_Likes: \1#_p;s_.*text":"([0-9,.]*) Follower".*_Followers: \1_p')"
 ttl_frames="Total of $(sed -nE 's_.*&#x2192\; ([0-9,]*)[^!]*_\1_p' <<< "${body_en}" | head -n 1) frames was successfully posted!!"
-rating="Rating · $(sed -nE 's_.*"text":"Rating \\u00b7 ([^"]*)".*_\1_p' <<< "${body_en}" | head -n 1)"
+rating="Rating · $(sed -nE 's_.*"text":"[0-9]+\\u0025 recommend \(([^"]*) Reviews\)".*_\1_p' <<< "${body_en}" | head -n 1)"
 page_name="$(sed -nE 's_.*","name":"([^"]*)","profile\_picture".*_\1_p' <<< "${body_en}" | head -n 1)"
 image="$(sed -nE 's_amp;__g;s_.*name="twitter:image" content="([^"]*)".*_\1_p' <<< "${body}" | head -n 1)"
 status_like="$(sed -nE 's_,__g;s_.*Likes: ([0-9,]*)#.*_\1_p' <<< "${status}")"
