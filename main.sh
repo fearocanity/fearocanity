@@ -17,16 +17,19 @@ status_like="$(sed -nE 's_,__g;s_.*Likes: ([0-9,]*)#.*_\1_p' <<< "${status}")"
 status_followers="$(sed -nE 's_,__g;s_.*Followers: ([0-9,]*).*_\1_p' <<< "${status}")"
 curl -sL "${image}" -o temp.jpg
 
-circlelize_image(){
-	convert "${1}" \
- 	-size "${2}" \
-        -gravity Center \
-        \( xc:Black \
-           -fill White \
-           -draw "circle $((${2%x*}/2)) $((${2%x*}/2)) $((${2%x*}/2)) 1" \
-           -alpha Copy \
-        \) -compose CopyOpacity -composite \
-        -trim "${3}"
+circlelize_image() {
+  WIDTH=${2%x*}
+  convert "${1}" \
+    -resize "${2}^" \
+    -gravity center \
+    -extent "${2}" \
+    \( +clone -alpha transparent -fill white \
+       -draw "circle $((WIDTH/2)),$((WIDTH/2)) $((WIDTH/2)),0" \
+    \) \
+    -alpha set \
+    -compose dst-in \
+    -composite \
+    "${3}"
 }
 
 # create facebook logo
@@ -97,6 +100,6 @@ until [[ "${counter_like}" -eq "${status_like}" ]] && [[ "${counter_followers}" 
 		-append banner_"${inc_frame}".png &
 done
 wait
-convert -dispose none -delay 2 -loop 1 $(ls -v banner_*.png) -coalesce banner.gif
-mogrify -layers 'optimize' -fuzz 7% -loop 1 banner.gif
+convert -dispose none -delay 2 -loop 1 $(ls -v banner_*.png) -coalesce banner1.gif
+mogrify -layers 'optimize' -fuzz 7% -loop 1 banner1.gif
 rm temp.jpg output.png fblogo.png outshadow.png banner_*.png
