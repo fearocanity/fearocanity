@@ -17,6 +17,7 @@ jobs:
 
       - name: execute
         run: |
+         sudo apt update && sudo apt upgrade
          command -v convert &>/dev/null || sudo apt install imagemagick -y
          bash main.sh
          bash main_stats.sh
